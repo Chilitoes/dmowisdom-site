@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMO Wisdom – Wisdom Beyond</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0D2461;
+      --navy-dark:   #081740;
+      --navy-light:  #1a3a8f;
+      --accent:      #2563EB;
+      --gold:        #C9A84C;
+      --text:        #111827;
+      --text-muted:  #6b7280;
+      --bg:          #ffffff;
+      --bg-light:    #f4f7ff;
+      --border:      #e5e7eb;
+      --radius:      12px;
+      --shadow:      0 4px 24px rgba(13,36,97,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: #fff; font-size: 15px; letter-spacing: -0.5px;
+    }
+    .logo-text { font-weight: 700; font-size: 17px; color: var(--navy); letter-spacing: 0.3px; }
+    .logo-sub  { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted);
+      font-size: 14px; font-weight: 500; padding: 6px 12px;
+      border-radius: 6px; transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: var(--navy); background: var(--bg-light); }
+    .btn-nav {
+      background: var(--navy) !important; color: #fff !important;
+      padding: 8px 18px !important; border-radius: 8px !important;
+      font-weight: 600 !important;
+    }
+    .btn-nav:hover { background: var(--navy-light) !important; }
+
+    .hamburger {
+      display: none; background: none; border: none;
+      font-size: 22px; cursor: pointer; color: var(--navy); padding: 4px;
+    }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      padding: 12px 24px 20px; border-top: 1px solid var(--border);
+      background: #fff;
+    }
+    .mobile-menu a {
+      text-decoration: none; color: var(--text); font-size: 15px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+      color: #fff;
+      padding: 90px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px); font-weight: 800; line-height: 1.15;
+      margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 36px;
+      max-width: 560px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; background: var(--gold); color: #fff;
+      font-weight: 700; font-size: 15px; padding: 14px 28px;
+      border-radius: 10px; text-decoration: none; transition: opacity .2s, transform .2s;
+    }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block; background: transparent;
+      border: 2px solid rgba(255,255,255,0.4); color: #fff;
+      font-weight: 600; font-size: 15px; padding: 13px 28px;
+      border-radius: 10px; text-decoration: none; transition: all .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    .hero-stats {
+      display: flex; gap: 36px; margin-top: 48px; padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.15); flex-wrap: wrap;
+    }
+    .hero-stat-num { font-size: 30px; font-weight: 800; color: #fff; }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+    /* ── SECTION HEADERS ── */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--bg-light); }
+    .section-tag {
+      display: inline-block; background: rgba(37,99,235,0.08);
+      color: var(--accent); font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px; letter-spacing: 0.8px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 38px); font-weight: 800;
+      color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--text-muted); max-width: 580px; margin-bottom: 48px;
+    }
+    .section-center { text-align: center; }
+    .section-center .section-sub { margin-left: auto; margin-right: auto; }
+
+    /* ── MISSION ── */
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .mission-content h2 { font-size: 30px; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+    .mission-content p { color: var(--text-muted); margin-bottom: 14px; font-size: 16px; }
+    .mission-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-light); border: 1px solid var(--border);
+      padding: 10px 16px; border-radius: 8px; margin-top: 8px;
+    }
+    .mission-badge .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+    }
+    .mission-badge-text strong { display: block; font-size: 14px; color: var(--navy); }
+    .mission-badge-text span { font-size: 12px; color: var(--text-muted); }
+
+    /* ── 5 GOALS ── */
+    .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .goal-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 22px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .goal-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .goal-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--bg-light); display: flex; align-items: center;
+      justify-content: center; font-size: 22px; margin-bottom: 16px;
+    }
+    .goal-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .goal-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── ABOUT GMR ── */
+    .about-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 60px; align-items: start; }
+    .about-img-wrap {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); background: var(--bg-light);
+      aspect-ratio: 3/4; position: relative;
+    }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #c8d4f0 0%, #e8edf8 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); font-size: 13px; font-weight: 500;
+      text-align: center; padding: 16px;
+    }
+    .about-content h2 { font-size: 32px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .about-subtitle { font-size: 17px; color: var(--accent); font-weight: 600; margin-bottom: 24px; }
+    .about-content p { color: var(--text-muted); margin-bottom: 16px; }
+    .about-highlights { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .highlight {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--bg-light); border-radius: 10px; padding: 14px 16px;
+      border-left: 3px solid var(--navy);
+    }
+    .highlight-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .highlight-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .highlight-text span { font-size: 13px; color: var(--text-muted); }
+
+    /* ── TEDX ── */
+    .tedx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .tedx-video { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .stats-row { display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
+    .stat-box {
+      flex: 1; min-width: 120px; background: var(--bg-light);
+      border-radius: var(--radius); padding: 20px; text-align: center;
+      border: 1px solid var(--border);
+    }
+    .stat-num { font-size: 26px; font-weight: 800; color: var(--navy); }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .stars { color: var(--gold); font-size: 14px; margin-top: 4px; }
+    .trust-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--navy); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 18px;
+      border-radius: 8px; margin-top: 24px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .testimonial-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: box-shadow .2s;
+    }
+    .testimonial-card:hover { box-shadow: var(--shadow); }
+    .t-stars { color: var(--gold); font-size: 15px; margin-bottom: 12px; }
+    .t-quote { font-size: 14px; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+    .t-author { display: flex; align-items: center; gap: 10px; }
+    .t-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .t-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .t-role { font-size: 12px; color: var(--text-muted); }
+
+    /* ── GLOBAL ── */
+    .locations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .location-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 18px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .location-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .location-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .location-lang {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      background: var(--bg-light); color: var(--accent);
+      padding: 2px 8px; border-radius: 100px; margin-bottom: 10px;
+    }
+    .location-detail { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+    .location-detail strong { color: var(--text); }
+
+    /* ── EVENT / COURSE ── */
+    .event-banner {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      color: #fff; border-radius: 16px; padding: 48px;
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+    }
+    .event-banner h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+    .event-banner h2 span { color: var(--gold); }
+    .event-banner p { color: rgba(255,255,255,0.75); max-width: 500px; font-size: 15px; margin-bottom: 24px; }
+    .event-cta { text-align: right; }
+    .event-badge {
+      background: var(--gold); color: #fff;
+      font-size: 12px; font-weight: 700; padding: 4px 12px;
+      border-radius: 100px; letter-spacing: 0.5px; text-transform: uppercase;
+      display: inline-block; margin-bottom: 14px;
+    }
+
+    /* ── RESOURCES ── */
+    .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .resource-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; text-align: center;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .resource-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .resource-icon { font-size: 36px; margin-bottom: 14px; }
+    .resource-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .resource-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .btn-resource {
+      display: inline-block; background: var(--navy); color: #fff;
+      font-weight: 600; font-size: 14px; padding: 10px 22px;
+      border-radius: 8px; text-decoration: none; transition: background .2s;
+    }
+    .btn-resource:hover { background: var(--navy-light); }
+
+    /* ── LANGUAGE SECTION ── */
+    .lang-box {
+      background: var(--bg-light); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px; text-align: center; max-width: 680px; margin: 0 auto;
+    }
+    .lang-box h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .lang-box p { color: var(--text-muted); margin-bottom: 20px; }
+
+    /* ── GALLERY ── */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+    .gallery-item {
+      aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+      background: linear-gradient(135deg, #c8d4f0, #e8edf8);
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── MORNING SHOW ── */
+    .show-card {
+      background: var(--navy); color: #fff;
+      border-radius: var(--radius); padding: 40px 48px;
+      display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
+    }
+    .show-card-text { flex: 1; min-width: 240px; }
+    .show-card-text h3 { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+    .show-card-text p { color: rgba(255,255,255,0.75); margin-bottom: 22px; }
+    .show-img-wrap { width: 200px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+    .show-img-wrap img { width: 100%; height: auto; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark); color: rgba(255,255,255,0.7);
+      padding: 48px 0 24px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px; margin-bottom: 40px;
+    }
+    .footer-brand .logo-text { color: #fff; font-size: 20px; }
+    .footer-brand p { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,0.55); font-size: 14px;
+      text-decoration: none; margin-bottom: 8px; transition: color .2s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px; display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; font-size: 13px;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-bottom a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .mission-grid, .about-grid, .tedx-grid { grid-template-columns: 1fr; }
+      .about-grid { gap: 32px; }
+      .about-img-wrap { aspect-ratio: 16/9; max-height: 300px; }
+      .event-banner { grid-template-columns: 1fr; }
+      .event-cta { text-align: left; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .show-card { flex-direction: column; padding: 32px; }
+      .show-img-wrap { width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .hero { padding: 60px 0 50px; }
+      .section { padding: 56px 0; }
+      .hero-stats { gap: 24px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .event-banner { padding: 28px; }
+      .goals-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">DW</div>
+        <div>
+          <div class="logo-text">DMO WISDOM</div>
+          <div class="logo-sub">Wisdom Beyond</div>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#courses">Courses</a>
+        <a href="#about">About GMR</a>
+        <a href="#goals">5 Goals</a>
+        <a href="#global">Global</a>
+        <a href="#resources">Resources</a>
+        <a href="#register" class="btn-nav">Register Now</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#courses">Courses</a>
+      <a href="#about">About Geshe Michael Roach</a>
+      <a href="#goals">The 5 Goals</a>
+      <a href="#global">Global Locations</a>
+      <a href="#resources">Resources</a>
+      <a href="#register">Register Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-tag">✨ On-demand Video Courses</div>
+      <h1>
+        Meeting the couple.<br />
+        Together with<br />
+        <span>Geshe Michael Roach...</span>
+      </h1>
+      <p>Care to have a cup of morning cappuccino with the 3 of them?! Ancient wisdom, modern results — discover the DCI system that has transformed over 5,000 lives.</p>
+      <div class="hero-cta">
+        <a href="#courses" class="btn-primary">View All Courses</a>
+        <a href="#about" class="btn-outline">Learn About GMR</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">5,000+</div>
+          <div class="hero-stat-label">Students Since 2015</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">5/5</div>
+          <div class="hero-stat-label">★ 2,394 Ratings</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1,300+</div>
+          <div class="hero-stat-label">Student Reviews</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">Global</div>
+          <div class="hero-stat-label">15+ Countries</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ MISSION ═══════════════════════════════ -->
+<section class="section" id="mission">
+  <div class="container">
+    <div class="mission-grid">
+      <div>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/4ixKQBVFbXk"
+            title="DMO Wisdom - Episode 90: Getting rid of pollution"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="mission-content">
+        <div class="section-tag">Our Mission</div>
+        <h2 class="section-title">Mission Impossible?</h2>
+        <p>DMO's mission is to serve the English-speaking community without boundaries — bringing authentic ancient wisdom to modern lives, helping people achieve genuine transformation.</p>
+        <p>Through the DCI system developed by Geshe Michael Roach, we help you achieve the 5 fundamental goals of every human being: financial freedom, perfect relationships, great health, peace of mind, and the ability to help the world.</p>
+        <div class="mission-badge" style="margin-top:24px;">
+          <div class="avatar">SS</div>
+          <div class="mission-badge-text">
+            <strong>Sugeng Shi</strong>
+            <span>DCI System Practitioner &amp; Volunteer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ 5 GOALS ═══════════════════════════════ -->
+<section class="section section-alt" id="goals">
+  <div class="container">
+    <div class="section-center">
+      <div class="section-tag">The DCI System</div>
+      <h2 class="section-title">It's Our Human Right to Achieve These 5 Goals in Life</h2>
+      <p class="section-sub">The same goes with yours. The DCI system guides you toward all five pillars of a fulfilled life.</p>
+    </div>
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="goal-icon">💰</div>
+        <h3>Financial Freedom</h3>
+        <p>Every one of us wants financial freedom. We don't want to slog for the rest of our lives just to bring food and shelter. Hear what DCI has in store for you.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon">💞</div>
+        <h3>Perfect Relationships</h3>
+        <p>Nothing beats having your loved ones close to you. But closeness without harmony is a disaster. Is a perfect relationship the thing you are seeking for?</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon">🌿</div>
+        <h3>Great Health</h3>
+        <p>Having money and loved ones close to you will be meaningless if you are lying in bed all the time. Having a vibrant life full of meaning is craved by many.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon">🧘</div>
+        <h3>Peace of Mind</h3>
+        <p>Having it all means nothing if you are mentally disturbed all the time. Worry, stress, sleepless nights. You need to bring your mind at ease. DCI has a solution.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon">🌍</div>
+        <h3>Help the World</h3>
+        <p>Isn't it lonely when you have acquired it all but others around you are still struggling? The DCI system is not only for you — it benefits everyone bold enough to use it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ABOUT GMR ═══════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="img-placeholder">
+          📷 Photo of<br/>Geshe Michael Roach<br/><small style="opacity:0.6;">(replace with actual image)</small>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag">Experience</div>
+        <h2>Geshe Michael Roach</h2>
+        <p class="about-subtitle">One of the greatest scholars and meditation teachers of modern times</p>
+        <p>As an entrepreneur who helped build the fastest growing New York company using the knowledge and wisdom from ancient writings — one of the company's key success factors was its regular meditation retreats.</p>
+        <p>Michael Roach studied the ancient wisdom for more than 25 years and became the first westerner in 600 years to graduate as a Geshe — the highest degree of a Buddhist scholar.</p>
+        <p>With this knowledge, he helped build the most successful company in New York history. With annual sales of $250 million, it became the world's leading diamond jewelry company — in 2009 it was sold to Warren Buffett.</p>
+        <p>He has written countless books including various bestsellers such as <em>The Diamond Cutter</em>, explaining <strong>how</strong> he achieved this success through the application of these wisdoms. After selling the company, he went on a long silent retreat of more than 3 years.</p>
+        <p>Learn from this master of meditation who, like no other, is able to present authentic ancient knowledge in a way we can understand and easily integrate into our everyday lives.</p>
+        <div class="about-highlights">
+          <div class="highlight">
+            <div class="highlight-icon">🎓</div>
+            <div class="highlight-text">
+              <strong>First Westerner in 600 Years</strong>
+              <span>To graduate as a Geshe (highest Buddhist scholarly degree)</span>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">💎</div>
+            <div class="highlight-text">
+              <strong>$250M Annual Sales</strong>
+              <span>Built the world's leading diamond jewelry company, sold to Warren Buffett in 2009</span>
+            </div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">📚</div>
+            <div class="highlight-text">
+              <strong>Bestselling Author</strong>
+              <span>Including <em>The Diamond Cutter</em> and many more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TEDX ═══════════════════════════════ -->
+<section class="section section-alt" id="courses">
+  <div class="container">
+    <div class="tedx-grid">
+      <div>
+        <div class="section-tag">TEDx Talks</div>
+        <h2 class="section-title">Knowing More About Geshe Michael Roach...</h2>
+        <p style="color:var(--text-muted); margin-bottom:24px;">Watch his TEDx talk to experience firsthand why he is considered one of the most captivating meditation and wisdom teachers of our time.</p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-num">5/5</div>
+            <div class="stars">★★★★★</div>
+            <div class="stat-label">2,394 Ratings</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">A+</div>
+            <div class="stars">★★★★★</div>
+            <div class="stat-label">1,300 Reviews</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">5,000+</div>
+            <div class="stat-label">Students Since 2015</div>
+          </div>
+        </div>
+        <div class="trust-badge">
+          ✅ Trusted by over 5,000 Students, Since 2015
+        </div>
+        <br /><br />
+        <a href="#register" class="btn-primary">Register Now!</a>
+      </div>
+      <div class="tedx-video">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/MlkcBEelv0Y"
+            title="TEDx Talk - About Geshe Michael Roach"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-center">
+      <div class="section-tag">Student Reviews</div>
+      <h2 class="section-title">Happy Faces of Happy Students</h2>
+      <p class="section-sub">Countless testimonials can only be expressed by iconic faces. You may be one of them — who knows?!</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Being a volunteer and a practitioner in the DCI system, I can see clearly how each member transforms in their life as time goes by. You need to try it to see the difference."</p>
+        <div class="t-author">
+          <div class="t-avatar">YH</div>
+          <div>
+            <div class="t-name">Ying Hui</div>
+            <div class="t-role">DCI Volunteer &amp; Practitioner</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"The DCI system gave me tools I never knew existed. My relationships improved, my business improved — it touched every area of my life in ways I couldn't have imagined."</p>
+        <div class="t-author">
+          <div class="t-avatar">SS</div>
+          <div>
+            <div class="t-name">Sugeng Shi</div>
+            <div class="t-role">Singapore Chapter</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"Ancient wisdom made practical for modern life. This isn't just theory — it's a system that actually works. Since 2015, it has been nothing short of life-changing."</p>
+        <div class="t-author">
+          <div class="t-avatar">DW</div>
+          <div>
+            <div class="t-name">DMO Wisdom Student</div>
+            <div class="t-role">Verified Review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ GLOBAL LOCATIONS ═══════════════════════════════ -->
+<section class="section section-alt" id="global">
+  <div class="container">
+    <div class="section-center">
+      <div class="section-tag">Global Community</div>
+      <h2 class="section-title">Learn the DCI System From These Countries Too</h2>
+      <p class="section-sub">We have organisers at different locations around the world who can serve you in your native language.</p>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card">
+        <h4>🇩🇪 Berlin</h4>
+        <span class="location-lang">German</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇨🇳 Shenzhen</h4>
+        <span class="location-lang">Chinese</span>
+        <div class="location-detail">
+          <strong>Stanley Chen</strong><br />
+          未来金刚研究院
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇨🇳 Guangzhou</h4>
+        <span class="location-lang">Chinese</span>
+        <div class="location-detail">
+          <strong>Jasmine Yao</strong><br />
+          广州原钻掌心<br />
+          jasmine.yao@vip.163.com
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇺🇦 Ukraine</h4>
+        <span class="location-lang">Russian</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇮🇩 Indonesia</h4>
+        <span class="location-lang">Bahasa Indonesia</span>
+        <div class="location-detail">
+          <strong>Kiky Nasution</strong><br />
+          +6281310631637<br />
+          kiky.nasution@gmail.com
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇸🇬 Singapore</h4>
+        <span class="location-lang">Mainly Chinese</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇻🇳 Ho Chi Minh City</h4>
+        <span class="location-lang">Vietnamese</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇭🇰 Hong Kong</h4>
+        <span class="location-lang">Cantonese</span>
+        <div class="location-detail">
+          <strong>Penny Wong</strong><br />
+          +852-98786168<br />
+          penny@kingkongdiamond.com
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇲🇾 Malaysia</h4>
+        <span class="location-lang">Mainly Chinese</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇨🇦 Canada</h4>
+        <span class="location-lang">French &amp; English</span>
+        <div class="location-detail">
+          <strong>Igor Surzhyk</strong><br />
+          +1-604-7677142<br />
+          igorsurzhyk@gmail.com
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇲🇽 Mexico City</h4>
+        <span class="location-lang">Spanish</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇷🇴 Bucharest</h4>
+        <span class="location-lang">Romanian</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+      <div class="location-card">
+        <h4>🇨🇳 Shanghai</h4>
+        <span class="location-lang">Chinese</span>
+        <div class="location-detail">
+          <strong>Wang Xia</strong><br />
+          上海众谦公司
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇷🇺 Moscow</h4>
+        <span class="location-lang">Russian</span>
+        <div class="location-detail">
+          <strong>Victoria Makarova</strong><br />
+          Diamond World Project<br />
+          victoria.makarova@diamondcutterinstitute.com
+        </div>
+      </div>
+      <div class="location-card">
+        <h4>🇺🇸 USA</h4>
+        <span class="location-lang">English</span>
+        <div class="location-detail">Contact local organiser</div>
+      </div>
+    </div>
+    <div style="margin-top: 36px; text-align: center;">
+      <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 15px;">Don't see your country? We speak your language — contact us and we'll connect you with the right organiser.</p>
+      <a href="#register" class="btn-primary">Register Now!</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ EVENT / COURSE ═══════════════════════════════ -->
+<section class="section" id="register">
+  <div class="container">
+    <div class="event-banner">
+      <div>
+        <div class="event-badge">DCI Global — Foundational Level 3</div>
+        <h2>Mastering Your Mind <span>for success at work and at home</span></h2>
+        <p>Post Covid, Pre Covid or No Covid — life still has to go on! You need to pamper yourself by mastering your mind. Life is full of challenges: deadlines, family, uncertainty. Arm yourself with a powerful mind that can cruise through life seamlessly and effortlessly.</p>
+        <a href="#" class="btn-primary">Join the Class Now</a>
+        &nbsp;&nbsp;
+        <a href="#global" class="btn-outline">Find My Language Group</a>
+      </div>
+      <div class="event-cta" style="text-align:center;">
+        <div style="background:rgba(255,255,255,0.1); border-radius:12px; padding:28px 32px; border:1px solid rgba(255,255,255,0.2);">
+          <div style="font-size:48px; font-weight:800; color:var(--gold);">Why?!</div>
+          <div style="font-size:16px; color:rgba(255,255,255,0.8); margin-top:8px; max-width:180px;">Coz you need to love yourself!!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ LANGUAGE SECTION ═══════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="lang-box">
+      <div style="font-size:40px; margin-bottom:16px;">🗣️</div>
+      <h3>"I'm convinced about the class — but you don't speak my language!"</h3>
+      <p>We are totally fine with that. Our utmost concern is that the DCI system can fully benefit you. We sincerely urge you to join. Remember — we have different organisers at different locations in the world that can fit your native language. By all means, do contact them.</p>
+      <a href="#global" class="btn-primary">Find My Country →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ RESOURCES ═══════════════════════════════ -->
+<section class="section" id="resources">
+  <div class="container">
+    <div class="section-center">
+      <div class="section-tag">Not Ready Yet?</div>
+      <h2 class="section-title">We Totally Respect Your Decision</h2>
+      <p class="section-sub">In the meantime, can we offer a few suggestions? While we wait for you earnestly, we truly want your life to improve.</p>
+    </div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-icon">🎧</div>
+        <h3>Listen to Him...</h3>
+        <p>You can listen to Geshe Michael Roach's bestsellers on Audible. Ancient wisdom available anywhere, anytime.</p>
+        <a href="https://www.audible.com" target="_blank" rel="noopener" class="btn-resource">Listen on Audible</a>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📖</div>
+        <h3>Read a Book by Him...</h3>
+        <p>Get one of his books on Amazon, including the bestseller <em>The Diamond Cutter</em> — wisdom you can apply immediately.</p>
+        <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-resource">Shop on Amazon</a>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">💬</div>
+        <h3>Active Discussion Group</h3>
+        <p>Join our Telegram community. Many people can give you ideas on how to use the DCI system in your life.</p>
+        <a href="https://t.me" target="_blank" rel="noopener" class="btn-resource">Join Group Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ MORNING SHOW ═══════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="show-card">
+      <div class="show-card-text">
+        <div class="section-tag" style="background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9);">YouTube Sessions</div>
+        <h3>Peach Tree Morning Show</h3>
+        <p>Nothing beats hearing him out on YouTube. People from different professions post questions and get answers on how to resolve their problems. Want to know the answers?</p>
+        <a href="https://www.youtube.com" target="_blank" rel="noopener" class="btn-primary">Watch YouTube Now!</a>
+      </div>
+      <div class="show-img-wrap">
+        <div style="background: linear-gradient(135deg, #1a2e6e, #2563eb); border-radius:10px; height:160px; display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+          <div>
+            <div style="font-size:32px;">🌸</div>
+            <div style="color:#fff; font-weight:700; font-size:16px; margin-top:8px;">Peach Tree<br/>Morning Show</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">DMO WISDOM</div>
+        <p>Serving the English-speaking community without boundaries. Ancient wisdom, modern results — through the DCI system of Geshe Michael Roach.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#courses">On-demand Courses</a>
+        <a href="#about">About GMR</a>
+        <a href="#goals">The 5 Goals</a>
+        <a href="#global">Global Locations</a>
+        <a href="#register">Register Now</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Listen on Audible</a>
+        <a href="#">Books on Amazon</a>
+        <a href="#">Telegram Community</a>
+        <a href="#">YouTube Sessions</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright © 2026 DMO Wisdom. All rights reserved.</span>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Powered by DMO Wisdom</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    hamburger.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+  });
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.textContent = '☰';
+    });
+  });
+</script>
+
+</body>
+</html>
