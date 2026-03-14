@@ -1,5 +1,6 @@
-# ── Force HTTPS ──
+# ── Force HTTPS (DreamHost proxy-aware) ──
 RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
