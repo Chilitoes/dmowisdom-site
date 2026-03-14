@@ -51,10 +51,9 @@
     }
     .logo-icon {
       width: 38px; height: 38px;
-      background: var(--navy);
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; color: #fff; font-size: 15px; letter-spacing: -0.5px;
+      object-fit: contain;
+      display: block;
     }
     .logo-text { font-weight: 700; font-size: 17px; color: var(--navy); letter-spacing: 0.3px; }
     .logo-sub  { font-size: 11px; color: var(--text-muted); font-weight: 400; }
@@ -324,6 +323,34 @@
     .lang-box h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
     .lang-box p { color: var(--text-muted); margin-bottom: 20px; }
 
+    /* ── TEAM ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 28px;
+    }
+    .team-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+      text-align: center;
+    }
+    .team-card:hover { box-shadow: 0 8px 32px rgba(13,36,97,0.13); transform: translateY(-4px); }
+    .team-photo {
+      width: 100%; aspect-ratio: 1;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .team-photo-placeholder {
+      width: 100%; aspect-ratio: 1;
+      background: linear-gradient(135deg, #c8d4f0, #e8edf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+    }
+    .team-info { padding: 18px 16px 20px; }
+    .team-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .team-role { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
     /* ── GALLERY ── */
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
     .gallery-item {
@@ -399,7 +426,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="logo">
-        <div class="logo-icon">DW</div>
+        <img src="images/DMO Wisdom logo.jpg" alt="DMO Wisdom Logo" class="logo-icon" />
         <div>
           <div class="logo-text">DMO WISDOM</div>
           <div class="logo-sub">Wisdom Beyond</div>
@@ -408,6 +435,7 @@
       <div class="nav-links">
         <a href="#courses">Courses</a>
         <a href="#about">About GMR</a>
+        <a href="#team">Our Team</a>
         <a href="#goals">5 Goals</a>
         <a href="#global">Global</a>
         <a href="#resources">Resources</a>
@@ -418,6 +446,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#courses">Courses</a>
       <a href="#about">About Geshe Michael Roach</a>
+      <a href="#team">Our Team</a>
       <a href="#goals">The 5 Goals</a>
       <a href="#global">Global Locations</a>
       <a href="#resources">Resources</a>
@@ -537,9 +566,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <div class="img-placeholder">
-          📷 Photo of<br/>Geshe Michael Roach<br/><small style="opacity:0.6;">(replace with actual image)</small>
-        </div>
+        <img src="images/Geshe Michael.jpg" alt="Geshe Michael Roach" />
       </div>
       <div class="about-content">
         <div class="section-tag">Experience</div>
@@ -616,6 +643,75 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TEACHING TEAM ═══════════════════════════════ -->
+<section class="section" id="team">
+  <div class="container">
+    <div class="section-center">
+      <div class="section-tag">The People Behind DMO</div>
+      <h2 class="section-title">Meet the Teaching Team</h2>
+      <p class="section-sub">A dedicated team of DCI practitioners and instructors, each bringing their own experience of the system to guide your journey.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/Geshe Michael.jpg" alt="Geshe Michael Roach" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Geshe Michael Roach</div>
+          <div class="team-role">Founder & Lead Teacher<br/>DCI System Creator</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Sugeng.jpg" alt="Sugeng" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Sugeng</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Dawn Profile.jpg" alt="Dawn" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Dawn</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Cheryl Wong.jpg" alt="Cheryl Wong" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Cheryl Wong</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Choy Chee Yuan.jpg" alt="Choy Chee Yuan" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Choy Chee Yuan</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Lim Gaik Ling.jpeg" alt="Lim Gaik Ling" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Lim Gaik Ling</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Lim Lixuan.jpg" alt="Lim Lixuan" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Lim Lixuan</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/Xintian.jpg" alt="Xintian" class="team-photo" />
+        <div class="team-info">
+          <div class="team-name">Xintian</div>
+          <div class="team-role">DCI Practitioner & Instructor</div>
         </div>
       </div>
     </div>
@@ -878,7 +974,10 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo-text">DMO WISDOM</div>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+          <img src="images/DMO Wisdom logo.jpg" alt="DMO Wisdom Logo" style="width:38px; height:38px; border-radius:8px; object-fit:contain;" />
+          <div class="logo-text">DMO WISDOM</div>
+        </div>
         <p>Serving the English-speaking community without boundaries. Ancient wisdom, modern results — through the DCI system of Geshe Michael Roach.</p>
       </div>
       <div class="footer-col">
